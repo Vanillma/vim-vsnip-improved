@@ -23,6 +23,11 @@
 
 " Syntax highlighting for .snippets files (used for snipMate.vim)
 " Hopefully this should make snippets a bit nicer to write!
+if exists("b:current_syntax")
+  finish
+endif
+let b:current_syntax = "snippets"
+
 syn match snipComment '^#.*'
 syn match placeHolder '\${\d\+\(:.\{-}\)\=}' contains=snipCommand
 syn match tabStop '\$\d\+'
@@ -31,8 +36,8 @@ syn match snipCommand '\%(\\\@<!\%(\\\\\)*\)\@<=`.\{-}\%(\\\@<!\%(\\\\\)*\)\@<=`
 syn match snippet '^snippet.*' contains=multiSnipText,snipKeyword
 syn match snippet '^extends.*' contains=snipKeyword
 syn match multiSnipText '\S\+ \zs.*' contained
-syn match snipKeyword '^(snippet|extends)'me=s+8 contained
-syn match snipError "^[^#vse\t].*$"
+syn match snipKeyword '^snippet\|extends' contained
+syn match snipError '^[^#se\t ].*$'
 
 hi link snippet       Identifier
 hi link snipComment   Comment
